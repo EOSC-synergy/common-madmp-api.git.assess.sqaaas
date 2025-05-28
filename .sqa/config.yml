@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/RDA-DMP-Common/common-madmp-api:
+      branch: init
+      repo: https://github.com/RDA-DMP-Common/common-madmp-api.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/RDA-DMP-Common/common-madmp-api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-celadon-paradise.sh
+        container: qc.acc_skimpy-goldenrod-cattle
+  QC.Doc:
+    repos:
+      github.com/RDA-DMP-Common/common-madmp-api find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-apricot-liger.sh
+        container: qc.doc_sunny-chartreuse-coati
+      github.com/RDA-DMP-Common/common-madmp-api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-linen-chin.sh
+        container: qc.doc_sleazy-orchid-forest
+      github.com/RDA-DMP-Common/common-madmp-api markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-coral-chinchilla.sh
+        container: qc.doc_pokey-coral-chin
+  QC.Lic:
+    repos:
+      github.com/RDA-DMP-Common/common-madmp-api licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-chestnut-bandicoot.sh
+        container: qc.lic_pasty-goldenrod-hamster
+  QC.Ver:
+    repos:
+      github.com/RDA-DMP-Common/common-madmp-api get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-rust-akita.sh
+        container: qc.ver_woolly-alizarin-cuscus
+timeout: 5400
